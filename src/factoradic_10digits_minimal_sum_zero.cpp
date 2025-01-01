@@ -46,7 +46,7 @@
     const int  SET_SIZE                    = 10;
     const int  SET_PERMUTATIONS            = 10*9*8*7*6*5*4*3*2*1; // 10! = [0 .. 3,628,800)
     const int  SET_FACTORS  [ SET_SIZE   ] = { 362880, 40320, 5040, 720, 120, 24, 6, 2, 1, 1 };
-    const char SET_ELEMENTS [ SET_SIZE+1 ] = "\x09\x08\x07\x06\x05\x04\x03\x02\x01\x00"; // "9876543210";
+    const char SET_ELEMENTS [ SET_SIZE+1 ] = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09";
     struct FactoradicConverter
     {
         FactoradicConverter( const int factoradic )
