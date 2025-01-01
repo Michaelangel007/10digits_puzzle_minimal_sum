@@ -255,3 +255,74 @@ Here is a thread scaling comparing the naive brute force search (10,000,000,000)
 |    24 |   7004 ms |    15 ms |
 |    32 |   6225 ms |    12 ms |
 |    48 |   5001 ms |    18 ms |
+
+# Understanding Performance
+
+Why is the factoradic version _SO much faster_ then the naive version?
+
+* The naive version is doing (10,000,000,000 / 3,628,800) = 2755x MORE WORK.
+* The naive version is wasting time searching though 100*(1 - 10!/1e10) = 99.963712% INVALID permutations.
+* The factoradic version is searching 10!/1e10 = 0.036288% of the naive search space.
+* The factoradic version has 100% VALID permutations.
+
+For example:
+
+* Naive 0000000000 is an invalid permutation
+* Naive 0000000001 is an invalid permutation
+* Naive 0123456789 is the first valid permutation
+* Naive 9876543210 is the last valid permutation
+* Naive 9876543211 is an invalid permutation
+* Naive 9999999999 is an invalid permutation
+
+* Factoradic `      0` is the permutation 0123456789
+* Factoradic `      1` is the permutation 0123456798
+* Factoradic `3628798` is the permutation 9876543201
+* Factoradic `3628799` os the permutation 9876543210
+
+Putting this in table form:
+
+| Naive      | Permutation |
+|-----------:|------------:|
+| 0000000000 |     invalid |
+| 0000000001 |     invalid |
+|          : |           : |
+| 0123456788 |     invalid |
+| 0123456789 |       valid |
+| 0123456790 |     invalid |
+|          : |           : |
+|          : |           : |
+| 9876543209 |     invalid |
+| 9876543210 |       valid |
+| 9876543211 |     invalid |
+|          : |           : |
+| 9999999999 |     invalid |
+
+|Factoradic| Permtuation|
+|---------:|-----------:|
+|        0 |  123456789 |
+|        1 |  123456798 |
+|        2 |  123456879 |
+|        : |          : |
+|  3628797 | 9876543120 |
+|  3628798 | 9876543201 |
+|  3628799 | 9876543210 |
+
+The above factoradic table was made with this snippet:
+
+```c
+    printf( "|Factoradic| Permtuation|\n" );
+    printf( "|---------:|-----------:|\n" );
+    for( int factoradic = 0; factoradic < 3; factoradic++ )
+    {
+        FactoradicConverter f( factoradic );
+        int64_t n = f.nNatural;
+        printf( "|  %7d | %10zd |\n", factoradic, n );
+    }
+    printf( "|        : |          : |\n" );
+    for( int factoradic = SET_PERMUTATIONS-3; factoradic < SET_PERMUTATIONS; factoradic++ )
+    {
+        FactoradicConverter f( factoradic );
+        int64_t n = f.nNatural;
+        printf( "|  %7d | %10zd |\n", factoradic, n );
+    }
+```
