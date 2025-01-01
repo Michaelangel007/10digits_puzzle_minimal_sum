@@ -243,7 +243,7 @@ We can use a smarter _factoradic_ brute force search of 10! between \[0 ... 3,62
 
 # Thread Scaling
 
-Here is a thread scaling comparing the naive brute force search (10,000,000,000) vs factoradic brute force (3,628,800):
+Here is a thread scaling comparing the naive brute force search (10,000,000,000) vs factoradic brute force search (3,628,800):
 
 |Threads| Naive     |Factoradic|
 |------:|----------:|---------:|
