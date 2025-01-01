@@ -236,6 +236,10 @@ We can use a smarter _factoradic_ brute force search of 10! between \[0 ... 3,62
 984 *  7 =  6888   -123 * 56 =  -6888   =     0  [# 0/48] 0###
 ```
 
+**Legend:**
+
+* `0###` summation is zero but one of the numbers starts with zero
+* `== 0` summation is zero
 
 # Thread Scaling
 
