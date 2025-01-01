@@ -4,11 +4,11 @@
 
 Can you place all 10 digits `0`, `1`, `2` through `9` inclusive, with no repeats, in the blanks `_` to minimize the sum for this puzzle?
 
-      _ _ _ * _ _ = X
+      _ _ _ * _ _ = #####
 
-      _ _ _ * _ _ = Y
+    - _ _ _ * _ _ = #####
 
-                Z = X - Y
+                   ######
 
 One solution would be:
 
@@ -20,15 +20,15 @@ One solution would be:
 
 How do we solve this?  First, let's assign some variables:
 
-     a * b = X
-     c * d = Y
-         Z = X - Y
+     X = a * b
+     Y = c * d
+     Z = X - Y
 
 We can use a _naive_ brute force search for all numbers between \[0 ... 10,000,000,000\) and assigning them to the multiplicands & multipliers.
 
 ```
-     i.e.  ##########
-           aaabbcccdd
+     n =  ##########
+       -> aaabbcccdd
 ```
 
 We can use a smarter _factoradic_ brute force search of 10! between \[0 ... 3,628,800\) HOWEVER **we need "unpack" the factoradic number to the corresponding 10 digit permutation.**
