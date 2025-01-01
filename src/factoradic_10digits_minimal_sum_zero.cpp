@@ -1,7 +1,7 @@
 // https://www.reddit.com/r/askmath/comments/1hqjtej/what_answer_is_closest_to_zero/
 // Copyleft (C) 2024 Michaelangel007 / u/mysticreddit
     #define ALL_SOLUTIONS 0
-
+    
     #include <stdio.h>
     #include <string.h>
     #include <stdint.h>

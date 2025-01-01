@@ -82,7 +82,7 @@
             int AB = a*b;
             int CD =-c*d;
             int E  = AB + CD;
-            if (E <       0) continue;
+            if (E < 0) continue;
             
             DigitCounter digits;
             digits.CountDigits( a, 3 );
@@ -104,7 +104,7 @@
                 {
     #pragma omp atomic
                     nZeroFirst++;
-                    printf( "%3d * %2d = %5d   -%3d * %2d = %+6d   = %5d  [#%2d/%2d] 0####\n", a, b, AB, c, d, CD, E, iThread, gnThreadsActive );
+                    printf( "%3d * %2d = %5d   -%3d * %2d = %+6d   = %5d  [#%2d/%2d] 0###\n", a, b, AB, c, d, CD, E, iThread, gnThreadsActive );
                 }
                 else
                     printf( "%3d * %2d = %5d   -%3d * %2d = %+6d   = %5d  [#%2d/%2d] == 0\n", a, b, AB, c, d, CD, E, iThread, gnThreadsActive );
