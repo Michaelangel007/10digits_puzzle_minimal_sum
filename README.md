@@ -12,19 +12,26 @@ Can you place all 10 digits `0`, `1`, `2` through `9` inclusive, with no repeats
 
 One solution would be:
 
-   865 * 97 = 83905
-  -432 * 10 = -4320
-            = 79585
+     865 * 97 = 83905
+    -432 * 10 = -4320
+              = 79585
 
 # Solver
 
-We can use a naive brute force search all numbers between [0 ... 10,000,000,000) and assigning them to the multiplicands & multipliers.
+How do we solve this?  First, let's assign some variables:
 
-   a * b = X
-  -c * d = Y
-       Z = X - Y
+     a * b = X
+     c * d = Y
+         Z = X - Y
 
-We can use a smarter factoradic search of 10! between [0 ... 3,628,800) and "unpacking" the factoradic to a 10 digit permutation.
+We can use a _naive_ brute force search for all numbers between \[0 ... 10,000,000,000\) and assigning them to the multiplicands & multipliers.
+
+```
+     i.e.  ##########
+           aaabbcccdd
+```
+
+We can use a smarter _factoradic_ brute force search of 10! between \[0 ... 3,628,800\) HOWEVER **we need "unpack" the factoradic number to the corresponding 10 digit permutation.**
 
 # Solutions
 
