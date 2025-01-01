@@ -1,6 +1,6 @@
 # Introduction
 
-![Puzzle Picture](10digits_minimize_sum_wtyu0z22p7ae1.webp)
+![Puzzle Picture](pics/10digits_minimize_sum_1024x768.jpg)
 
 Can you place all 10 digits `0`, `1`, `2` through `9` inclusive, with no repeats, in the blanks `_` to minimize the sum for this puzzle?
 
