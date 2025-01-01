@@ -84,7 +84,7 @@
             int E  = AB + CD;
             if (E < 0) continue;
             
-            DigitCounter digits;
+            DigitCounter digits; // filter out numbers with duplicate digits
             digits.CountDigits( a, 3 );
             digits.CountDigits( b, 2 );
             digits.CountDigits( c, 3 );

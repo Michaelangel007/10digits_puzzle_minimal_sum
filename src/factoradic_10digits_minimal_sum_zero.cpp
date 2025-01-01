@@ -123,7 +123,7 @@
             int CD =-c*d;
             int E  = AB + CD;
             if (E < 0) continue;
-            
+    #if 0 // Not needed with factoradic since every permutation is guaranteed to be unique!
             DigitCounter digits;
             digits.CountDigits( a, 3 );
             digits.CountDigits( b, 2 );
@@ -131,7 +131,7 @@
             digits.CountDigits( d, 2 );
             if (!digits.IsValid())
                 continue;
-            
+    #endif
             if (aLowest[ iThread ] > E)
                 aLowest[ iThread ] = E;
             
