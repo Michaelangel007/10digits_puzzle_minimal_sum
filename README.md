@@ -247,14 +247,14 @@ Here is a thread scaling comparing the naive brute force search (10,000,000,000)
 
 |Threads| Naive     |Factoradic|
 |------:|----------:|---------:|
-|     1 | 113189 ms |   248 ms |
+|     1 | 113189 ms |   244 ms |
 |     2 |  66521 ms |   129 ms |
-|     4 |  35180 ms |    66 ms |
-|     8 |  18115 ms |    36 ms |
-|    16 |   9258 ms |    17 ms |
-|    24 |   7004 ms |    15 ms |
-|    32 |   6225 ms |    12 ms |
-|    48 |   5001 ms |    18 ms |
+|     4 |  35180 ms |    71 ms |
+|     8 |  18115 ms |    33 ms |
+|    16 |   9258 ms |    18 ms |
+|    24 |   7004 ms |    14 ms |
+|    32 |   6225 ms |    16 ms |
+|    48 |   5001 ms |    13 ms |
 
 # Understanding Performance
 
