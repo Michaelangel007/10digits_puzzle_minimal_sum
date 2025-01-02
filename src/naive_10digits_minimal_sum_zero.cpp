@@ -129,13 +129,12 @@
         
         clock_t nEnd = clock();
         double nMilliSeconds = 1000.0 * (double)(nEnd - nStart) / CLOCKS_PER_SEC;
-        printf( "Naive...\n" );
     #if ALL_SOLUTIONS
         printf( "N Sum: %d\n", nSolutions );
     #endif // ALL_SOLUTIONS
         printf( "0 Sum: %d\n", zSolutions );
         printf( "Zero First: %d (***)\n", nZeroFirst );
         printf( "Lowest: %zd\n", nLowest );
-        printf( "%.f milliseconds\n", nMilliSeconds );
+        printf( "%.f milliseconds, %d threads, Naive\n", nMilliSeconds, gnThreadsActive );
         return 0;
     }

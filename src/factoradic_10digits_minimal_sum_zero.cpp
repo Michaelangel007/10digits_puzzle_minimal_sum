@@ -14,35 +14,6 @@
           int gnThreadsActive  =   0; // 0 = auto detect; > 0 use manual # o f threads
     const int MAX_THREADS      = 256; // Threadripper 3990X
     
-    struct DigitCounter
-    {
-        DigitCounter()
-        {
-            memset( aDigits, 0, sizeof(aDigits) );
-        }
-        void CountDigits( int n, int nDigits )
-        {
-            int x = n;
-            for( int iDigit = 0; iDigit < nDigits; iDigit++ )
-            {
-                aDigits[ x % 10 ]++;
-                x /= 10;
-            }
-        }
-        bool IsValid()
-        {
-            bool valid = true;
-            for( int iDigit = 0; iDigit < 10; iDigit++ )
-                if (aDigits[ iDigit ] != 1)
-                {
-                    valid = false;
-                    break;
-                }
-            return valid;
-        }
-        char aDigits[10];
-    };
-    
     const int  SET_SIZE                    = 10;
     const int  SET_PERMUTATIONS            = 10*9*8*7*6*5*4*3*2*1; // 10! = [0 .. 3,628,800)
     const int  SET_FACTORS  [ SET_SIZE   ] = { 362880, 40320, 5040, 720, 120, 24, 6, 2, 1, 1 };
@@ -69,16 +40,16 @@
                 memcpy( aRemaining + q, aRemaining + q + 1, nLen );
             }
             
-            nNatural = 0;
+            nPermutation = 0;
             for (int iDigit = 0; iDigit < SET_SIZE; iDigit++)
             {
-                nNatural *= 10;
-                nNatural += aPermutation[ iDigit ]; // (aPermutation[ iDigit ] - '0');
+                nPermutation *= 10;
+                nPermutation += aPermutation[ iDigit ]; // (aPermutation[ iDigit ] - '0');
             }
         }
         char    aRemaining  [ SET_SIZE+1 ];
         char    aPermutation[ SET_SIZE+1 ];
-        int64_t nNatural;
+        int64_t nPermutation;
     };
     
     int main(int nArg, char *aArg[])
@@ -105,7 +76,7 @@
         for( int iThread = 0; iThread < MAX_THREADS; iThread++ )
             aLowest[ iThread ] = N;
         
-        int    nZeroFirst = 0;
+        int    nZeroFirst = 0; // is zero first digit in ANY a, b, c, d ?
         int    zSolutions = 0; //     198 solutions where E == 0
         int    nSolutions = 0; // 1814301 solutions where E != 0
         time_t nStart = clock();
@@ -114,7 +85,7 @@
         {
             const int iThread = omp_get_thread_num();
             FactoradicConverter factoradic( f );
-            int64_t rem = factoradic.nNatural;
+            int64_t rem = factoradic.nPermutation;
             int d = rem %  100; rem /=  100; //
             int c = rem % 1000; rem /= 1000; // -n4n3n2 * n1n0
             int b = rem %  100; rem /=  100; // +n9n8n7 * n6n5
@@ -123,15 +94,7 @@
             int CD =-c*d;
             int E  = AB + CD;
             if (E < 0) continue;
-    #if 0 // Not needed with factoradic since every permutation is guaranteed to be unique!
-            DigitCounter digits;
-            digits.CountDigits( a, 3 );
-            digits.CountDigits( b, 2 );
-            digits.CountDigits( c, 3 );
-            digits.CountDigits( d, 2 );
-            if (!digits.IsValid())
-                continue;
-    #endif
+            
             if (aLowest[ iThread ] > E)
                 aLowest[ iThread ] = E;
             
@@ -169,13 +132,12 @@
         
         clock_t nEnd = clock();
         double nMilliSeconds = 1000.0 * (double)(nEnd - nStart) / CLOCKS_PER_SEC;
-        printf( "Factoradic...\n" );
     #if ALL_SOLUTIONS
         printf( "N Sum: %d\n", nSolutions );
     #endif // ALL_SOLUTIONS
-        printf( "0 Sum: %d\n", zSolutions );
-        printf( "Zero First: %d (***)\n", nZeroFirst );
+        printf( "0 Sum: %d (== 0)\n", zSolutions );
+        printf( "Zero First: %d (0###)\n", nZeroFirst );
         printf( "Lowest: %zd\n", nLowest );
-        printf( "%.f milliseconds\n", nMilliSeconds );
+        printf( "%.f milliseconds, %d threads, Factoradic\n", nMilliSeconds, gnThreadsActive );
         return 0;
     }
